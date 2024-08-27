@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
+import axios from "axios";
+import Skeleton from "../UI/Skeleton";
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+import ExpiryCountdown from "../UI/ExpiryCountdown";
 
 const NewItems = () => {
+
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function getData() {
+      let response = (await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems")).data
+      setData(response)
+      setLoading(false)
+    }
+    getData()
+  },[])
+
+  const options = {
+    responsive: {
+        0: {
+            items: 1,
+        },
+        768: {
+            items: 2,
+        },
+        980: {
+            items: 3,
+        },
+        1200: {
+            items: 4,
+        },
+    },
+};
+
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -14,21 +50,35 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {new Array(4).fill(0).map((_, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+          {loading ?
+            new Array(4).fill(4).map((_,index) => (
+            <Skeleton
+            key={index}
+            width={"300px"}
+            height={"400px"}
+            borderRadius={15}/>
+                ))
+          :
+          <OwlCarousel className='owl-theme' loop dots={false} items={4} margin={10} {...options} nav
+          touchDrag={false}>
+          {data.map((elm, index) => (
+            // <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+            <div key={index}>
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link
-                    to="/author"
+                    to={`/author/${elm.authorId}`}
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
                     title="Creator: Monica Lucas"
                   >
-                    <img className="lazy" src={AuthorImage} alt="" />
+                    <img className="lazy" src={elm.authorImage} alt={elm.authorId} />
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
-                <div className="de_countdown">5h 30m 32s</div>
+                
+                {elm.expiryDate && <ExpiryCountdown
+                 expiryDate={elm.expiryDate}/>}
 
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
@@ -49,27 +99,29 @@ const NewItems = () => {
                     </div>
                   </div>
 
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${elm.nftId}`}>
                     <img
-                      src={nftImage}
+                      src={elm.nftImage}
                       className="lazy nft__item_preview"
-                      alt=""
+                      alt={elm.nftId}
                     />
                   </Link>
                 </div>
                 <div className="nft__item_info">
                   <Link to="/item-details">
-                    <h4>Pinky Ocean</h4>
+                    <h4>{elm.title}</h4>
                   </Link>
-                  <div className="nft__item_price">3.08 ETH</div>
+                  <div className="nft__item_price">{elm.price} ETH</div>
                   <div className="nft__item_like">
                     <i className="fa fa-heart"></i>
-                    <span>69</span>
+                    <span>{elm.likes}</span>
                   </div>
                 </div>
               </div>
             </div>
           ))}
+          </OwlCarousel>
+          }
         </div>
       </div>
     </section>

@@ -22,9 +22,6 @@ const HotCollections = () => {
     getData()
   },[])
 
-  console.log(data)
-  console.log(loading)
-
   const options = {
     responsive: {
         0: {
