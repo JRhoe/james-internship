@@ -42,12 +42,12 @@ const NftDisplayCard = ({elm, isHome}) => {
                     </div>
                     </div>
                 </div>
-                <Link to="/item-details">
+                <Link to={`/item-details/${elm.nftId}`}>
                     <img src={elm.nftImage} className="lazy nft__item_preview" alt={elm.nftId} />
                 </Link>
                 </div>
                 <div className="nft__item_info">
-                <Link to="/item-details">
+                <Link to={`/item-details/${elm.nftId}`}>
                     <h4>{elm.title}</h4>
                 </Link>
                 <div className="nft__item_price">{elm.price} ETH</div>
