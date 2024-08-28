@@ -42,10 +42,13 @@ const Author = () => {
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                      <img src={data.authorImage} alt="" />
+                      {loading ? <Skeleton height={100} width={100} borderRadius={100}/>
+                      : <img src={data.authorImage} alt="" />}
 
-                      <i className="fa fa-check"></i>
-                      <div className="profile_name">
+                      {!loading && <i className="fa fa-check"></i>}
+                      {loading ? <Skeleton height={75} width={600} borderRadius={10}/>
+                      :
+                        <div className="profile_name">
                         <h4>
                           {data.authorName}
                           <span className="profile_username">@{data.tag}</span>
@@ -56,12 +59,12 @@ const Author = () => {
                             Copy
                           </button>
                         </h4>
-                      </div>
+                      </div>}
                     </div>
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">{following ? data.followers + 1 : data.followers} followers</div>
+                      {!loading && <div className="profile_follower">{following ? data.followers + 1 : data.followers} followers</div>}
                       <Link to="#" className="btn-main" onClick={() => {
                         setFollowing(prev => !prev)
                       }}>

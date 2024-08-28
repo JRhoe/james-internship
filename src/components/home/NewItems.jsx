@@ -59,7 +59,7 @@ const NewItems = () => {
             borderRadius={15}/>
                 ))
           :
-          <OwlCarousel className='owl-theme' loop dots={false} items={4} margin={10} {...options} nav
+          <OwlCarousel data-aos="fade-in" className='owl-theme' loop dots={false} items={4} margin={10} {...options} nav
           touchDrag={false}>
           {data.map((elm, index) => (
             <NftDisplayCard

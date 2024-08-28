@@ -7,9 +7,11 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import Skeleton from "../UI/Skeleton";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const HotCollections = () => {
-
+  AOS.init();
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -59,7 +61,7 @@ const HotCollections = () => {
             borderRadius={15}/>
                 ))
           :
-          <OwlCarousel className='owl-theme' loop dots={false} items={4} margin={10} {...options} nav
+          <OwlCarousel data-aos="fade-in" className='owl-theme' loop dots={false} items={4} margin={10} {...options} nav
           touchDrag={false}>
           {data.map((elm) => (
             <div key={elm.id}>
