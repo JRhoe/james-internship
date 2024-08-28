@@ -23,7 +23,6 @@ const ExploreItems = () => {
     }
     getData()
   },[apiLink])
- console.log(apiLink)
   return (
     <>
       <div>
@@ -45,8 +44,9 @@ const ExploreItems = () => {
         borderRadius={10}/>
         ))
       :
-      data.map(elm => (
+      data.map((elm, index) => (
         <NftDisplayCard
+        key={index}
         elm={elm}
         isHome={false}/>
       )).slice(0,numToShow)}

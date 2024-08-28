@@ -76,7 +76,7 @@ const HotCollections = () => {
                     <i className="fa fa-check"></i>
                   </div>
                   <div className="nft_coll_info">
-                    <Link to={`/explore`}>
+                    <Link to={`/item-details/${elm.nftId}`}>
                       <h4>{elm.title}</h4>
                     </Link>
                     <span>ERC-{elm.code}</span>

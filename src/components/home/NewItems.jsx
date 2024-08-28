@@ -61,8 +61,9 @@ const NewItems = () => {
           :
           <OwlCarousel className='owl-theme' loop dots={false} items={4} margin={10} {...options} nav
           touchDrag={false}>
-          {data.map((elm) => (
+          {data.map((elm, index) => (
             <NftDisplayCard
+            key={index}
             elm={elm}
             isHome={true}/>
           ))}
