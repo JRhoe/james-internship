@@ -4,8 +4,6 @@ const ExpiryCountdown = ({ expiryDate }) => {
 
     const [timeRemaining, setTimeRemaining] = useState(getTimeRemainingString())
 
-    requestAnimationFrame(updateExTime)
-
     function getTimeRemainingString() {
         let timeLeft = expiryDate - Date.now()
         let seconds = Math.floor((timeLeft / 1000) % 60)
@@ -14,11 +12,9 @@ const ExpiryCountdown = ({ expiryDate }) => {
         return (`${hours}h ${minutes}m ${seconds}s`)
     }
 
-    function updateExTime() {
+    setInterval(() => {
         setTimeRemaining(getTimeRemainingString())
-        requestAnimationFrame(updateExTime)
-      }
-
+    },1000)
     
     return (
         <div className="de_countdown">{timeRemaining}</div>
