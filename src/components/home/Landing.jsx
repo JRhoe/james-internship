@@ -2,8 +2,11 @@ import React from "react";
 import NFT from "../../images/nft.png";
 import backgroundImage from "../../images/bg-shape-1.jpg";
 import { Link } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Landing = () => {
+  AOS.init();
   return (
     <section
       id="section-hero"
@@ -15,7 +18,7 @@ const Landing = () => {
       <div className="v-center">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-md-6">
+            <div data-aos="zoom-in" className="col-md-6">
               <div className="spacer-single"></div>
               <h6>
                 <span className="text-uppercase id-color-2">
@@ -36,7 +39,7 @@ const Landing = () => {
               <div className="mb-sm-30"></div>
             </div>
             <div className="col-md-6 xs-hide">
-              <img src={NFT} className="lazy img-fluid" alt="" />
+              <img data-aos="zoom-in-up" src={NFT} className="lazy img-fluid" alt="" />
             </div>
           </div>
         </div>
