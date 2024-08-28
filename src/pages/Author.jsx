@@ -22,7 +22,6 @@ const Author = () => {
     }
     getData()
   },[])
-  console.log(data)
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
