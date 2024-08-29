@@ -13,11 +13,13 @@ const ExpiryCountdown = ({ expiryDate }) => {
     }
 
     setInterval(() => {
+        if(!expiryDate)
+            return
         setTimeRemaining(getTimeRemainingString())
     },1000)
     
     return (
-        <div className="de_countdown">{timeRemaining}</div>
+        <div className="de_countdown">{!expiryDate ? "expired" : timeRemaining}</div>
     );
 }
 
