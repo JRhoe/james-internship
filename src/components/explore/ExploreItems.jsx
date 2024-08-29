@@ -50,7 +50,7 @@ const ExploreItems = () => {
         elm={elm}
         isHome={false}/>
       )).slice(0,numToShow)}
-      <div className="col-md-12 text-center">
+      {numToShow < data.length && <div className="col-md-12 text-center">
         <button to="" id="loadmore" className="btn-main lead" onClick={() => {
           if ((numToShow + 4) <= data.length) {
             setNumToShow((prev) => (prev+4))
@@ -59,6 +59,7 @@ const ExploreItems = () => {
           Load more
         </button>
       </div>
+      }
     </>
   );
 };

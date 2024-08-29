@@ -60,7 +60,7 @@ const TopSellers = () => {
                     </Link>
                   </div>
                   <div className="author_list_info">
-                    <Link to="/author">{elm.authorName}</Link>
+                    <Link to={`/author/${elm.authorId}`}>{elm.authorName}</Link>
                     <span>{elm.price} ETH</span>
                   </div>
                 </li>

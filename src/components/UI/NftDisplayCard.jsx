@@ -22,7 +22,7 @@ const NftDisplayCard = ({elm, isHome}) => {
                 </Link>
                 </div>
                 
-                {elm.expiryDate && <ExpiryCountdown expiryDate={elm.expiryDate}/>}
+                <ExpiryCountdown expiryDate={elm.expiryDate}/>
 
                 <div className="nft__item_wrap">
                 <div className="nft__item_extra">
